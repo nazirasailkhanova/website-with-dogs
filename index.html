@@ -1,52 +1,172 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Приют для собак</title>
-  <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>Приют для собак</title>
+    <style>
+        /* Общие стили */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Навбар */
+        nav {
+            background-color: #ff6b6b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+        }
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav ul li a {
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffe66d;
+        }
+
+        /* Хедер */
+        header {
+            background: url('https://images.dog.ceo/breeds/terrier-norfolk/n02094114_113.jpg') center/cover no-repeat;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 8px #000;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        /* Секции */
+        section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        section h2 {
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        section p {
+            line-height: 1.6;
+        }
+
+        /* Галерея */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Футер */
+        footer {
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Адаптив */
+        @media(max-width: 768px){
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+            header {
+                font-size: 32px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <nav class="navbar">
-    <div class="logo">DogShelter</div>
-    <ul class="nav-links">
-      <li><a href="#">Главная</a></li>
-      <li><a href="#">Наши собаки</a></li>
-      <li><a href="#">Контакты</a></li>
-    </ul>
-  </nav>
-</header>
+    <!-- Навбар -->
+    <nav>
+        <div class="logo">Приют "Счастливый Пёс"</div>
+        <ul>
+            <li><a href="#">Главная</a></li>
+            <li><a href="#">О приюте</a></li>
+            <li><a href="#">Галерея</a></li>
+            <li><a href="#">Контакты</a></li>
+        </ul>
+    </nav>
 
-<main>
-  <section class="hero">
-    <h1>Добро пожаловать в DogShelter</h1>
-    <p>Поможем найти дом каждому пушистому другу.</p>
-    <button>Помочь приюту</button>
-  </section>
+    <!-- Хедер -->
+    <header>
+        Найди своего друга
+    </header>
 
-  <section class="dogs">
-    <div class="dog-card">
-      <h3>Барсик</h3>
-      <p>Возраст: 2 года. Любит играть и обниматься.</p>
-    </div>
-    <div class="dog-card">
-      <h3>Лаки</h3>
-      <p>Возраст: 3 года. Очень дружелюбный и активный.</p>
-    </div>
-    <div class="dog-card">
-      <h3>Молли</h3>
-      <p>Возраст: 1 год. Ласковая и любит детей.</p>
-    </div>
-  </section>
-</main>
+    <!-- О приюте -->
+    <section>
+        <h2>О нашем приюте</h2>
+        <p>
+            Наш приют заботится о бездомных собаках. Мы обеспечиваем их едой, медицинской помощью и любовью. Каждый питомец ищет свой новый дом и верных хозяев.
+        </p>
+    </section>
 
-<footer>
-  <p>&copy; 2025 DogShelter. Все права защищены.</p>
-</footer>
+    <!-- Галерея -->
+    <section>
+        <h2>Галерея собак</h2>
+        <div class="gallery">
+            <img src="https://images.dog.ceo/breeds/husky/n02110185_1469.jpg" alt="Собака 1">
+            <img src="https://images.dog.ceo/breeds/labrador/n02099712_4530.jpg" alt="Собака 2">
+            <img src="https://images.dog.ceo/breeds/pug/n02110958_16653.jpg" alt="Собака 3">
+            <img src="https://images.dog.ceo/breeds/akita/Akita_Inu_dog.jpg" alt="Собака 4">
+            <img src="https://images.dog.ceo/breeds/terrier-norfolk/n02094114_113.jpg" alt="Собака 5">
+            <img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1362.jpg" alt="Собака 6">
+        </div>
+    </section>
 
-<script src="assets/js/main.js"></script>
+    <!-- Контакты -->
+    <section>
+        <h2>Контакты</h2>
+        <p>
+            Адрес: ул. Любимая, д.10, г. Алматы <br>
+            Телефон: +7 777 123 45 67 <br>
+            Email: info@happy-dog.kz
+        </p>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        © 2025 Приют "Счастливый Пёс" | Все права защищены
+    </footer>
+
 </body>
 </html>
