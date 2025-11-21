@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Приют для собак — Добрые Лапы</title>
+
+<style>
+  :root{
+    --bg:#efefef;
+    --card:#f6f6f6;
+    --accent:#6b7280; /* muted gray */
+    --accent-2:#111827; /* dark */
+    --primary:#4b5563; /* button */
+    --green:#2ea44f;
+    --radius:14px;
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:var(--accent-2);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* container */
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+
+  /* HEADER */
+  header{
+    background:#1f2937;
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:40;
+    box-shadow:0 4px 18px rgba(15,23,42,0.12);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;max-width:var(--maxw);margin:0 auto;}
+  .logo{font-weight:800;font-size:20px;letter-spacing:0.2px}
+  nav{display:flex;gap:18px;align-items:center}
+  nav a{color:rgba(255,255,255,0.92);text-decoration:none;font-weight:600}
+  nav a:hover{color:var(--green)}
+  .burger{display:none;background:none;border:0;color:white;font-size:22px;cursor:pointer}
+
+  /* HERO */
+  .hero{padding:80px 0 70px;text-align:center;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.08)), url("https://placedog.net/1600/700") center/cover no-repeat;color:white}
+  .hero .container{padding-top:10px}
+  .hero h1{font-size:44px;margin:0 0 14px;line-height:1.02;font-weight:800;text-shadow:0 6px 24px rgba(0,0,0,0.45)}
+  .hero p{font-size:18px;margin:0 0 22px;opacity:0.95}
+  .btn{display:inline-block;padding:12px 22px;border-radius:12px;text-decoration:none;font-weight:700;cursor:pointer}
+  .btn-primary{background:var(--primary);color:white;box-shadow:0 8px 30px rgba(75,85,99,0.12)}
+  .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.14);color:white}
+
+  /* SECTIONS */
+  section{padding:48px 0}
+  .section{background:white;border-radius:18px;padding:36px;margin:16px auto;box-shadow:0 10px 30px rgba(16,24,40,0.06)}
+  .section h2{margin:0 0 12px;font-size:28px}
+  .lead{color:#6b7280;margin-bottom:18px}
+
+  /* ABOUT */
+  .about-grid{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+  .about-text{flex:1 1 420px}
+  .about-img{flex:0 0 320px;border-radius:12px;overflow:hidden}
+  .about-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* DOGS GRID */
+  .dogs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:18px}
+  .dog-card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(2,6,23,0.06);transition:transform .25s,box-shadow .25s;padding-bottom:12px;display:flex;flex-direction:column;align-items:stretch}
+  .dog-card:hover{transform:translateY(-8px);box-shadow:0 22px 55px rgba(2,6,23,0.12)}
+  .dog-photo{width:100%;height:200px;overflow:hidden}
+  .dog-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .dog-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
+  .dog-body h3{margin:0 0 6px;font-size:18px;color:var(--accent-2)}
+  .meta{font-size:13px;color:#6b7280;margin-bottom:8px}
+  .dog-body p{flex:1;margin:0 0 12px;color:#374151}
+  .card-actions{display:flex;gap:10px}
+  .btn-sm{padding:8px 12px;border-radius:10px;font-weight:700;font-size:14px}
+
+  /* HELP */
+  .help-list{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+  .help-item{background:linear-gradient(180deg,#fff,#fafafa);padding:14px 18px;border-radius:12px;min-width:200px;box-shadow:0 8px 20px rgba(2,6,23,0.04);font-weight:700;color:var(--accent-2)}
+
+  /* CONTACT */
+  .contact-grid{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+  .contact-card{background:var(--card);padding:18px;border-radius:12px;min-width:260px;box-shadow:0 8px 20px rgba(2,6,23,0.04)}
+  .contact-form{background:white;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.04);min-width:320px}
+  .contact-form label{display:block;margin-bottom:8px;font-weight:600;color:#374151}
+  .contact-form input,.contact-form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e7eb;margin-bottom:12px;font-size:14px}
+  .contact-form button{background:var(--green);color:white;border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}
+
+  /* FOOTER */
+  footer{padding:30px 0;text-align:center;color:#fff;background:#111827;margin-top:30px}
+  footer .creators{opacity:0.9;margin-top:12px;font-weight:700}
+
+  /* MODAL */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80;opacity:0;pointer-events:none;transition:opacity .18s}
+  .modal{background:white;border-radius:12px;max-width:720px;width:100%;overflow:hidden;box-shadow:0 30px 80px rgba(2,6,23,0.3)}
+  .modal-inner{display:flex;gap:0;flex-wrap:wrap}
+  .modal-photo{flex:1 1 320px;min-height:260px;overflow:hidden}
+  .modal-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .modal-body{flex:1 1 360px;padding:18px}
+  .modal-close{background:#ef4444;color:white;border:0;padding:8px 12px;border-radius:10px;cursor:pointer}
+
+  .modal-backdrop.show{opacity:1;pointer-events:auto}
+
+  /* Responsive */
+  @media(max-width:1000px){
+    .dogs-grid{grid-template-columns:repeat(2,1fr)}
+    .about-img{order:-1}
+  }
+  @media(max-width:640px){
+    nav{display:none}
+    .burger{display:block}
+    .dogs-grid{grid-template-columns:1fr}
+    .hero{padding:60px 14px}
+    .hero h1{font-size:30px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner container">
+    <div class="logo">Добрые Лапы</div>
+    <nav>
+      <a href="#about" class="nav-link">О нас</a>
+      <a href="#dogs" class="nav-link">Собаки</a>
+      <a href="#help" class="nav-link">Помощь</a>
+      <a href="#contact" class="nav-link">Контакты</a>
+    </nav>
+    <button class="burger" aria-label="menu" id="burger">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1>Подарим собакам новый дом</h1>
+    <p>Тёплый приют, забота и шанс на лучшую жизнь — присоединяйтесь!</p>
+    <a class="btn btn-primary" href="#dogs" id="chooseBtn">Выбрать собаку</a>
+    <a class="btn btn-ghost" href="#help" style="margin-left:12px">Помочь приюту</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section container">
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>О нас</h2>
+      <p class="lead">Мы — небольшой приют, который спасает собак с улиц, лечит, социализирует и помогает найти новые семьи.</p>
+      <p>Каждая собака у нас получает ветеринарную помощь, уход и внимание. Мы работаем на волонтёрских и пожертвованиях — любая помощь важна.</p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.dog.ceo/breeds/terrier-border/n02093754_329.jpg" alt="приют">
+    </div>
+  </div>
+</section>
+
+<!-- DOGS -->
+<section id="dogs" class="section container">
+  <h2>Наши собаки</h2>
+  <p class="lead">Выберите собаку — нажмите «Подробнее» чтобы увидеть информацию или «Усыновить» чтобы написать нам.</p>
+
+  <div class="dogs-grid" id="dogsGrid">
+    <!-- Card 1 -->
+    <article class="dog-card" data-name="Шарик" data-age="3 года" data-breed="Дворняжка" data-desc="Добрый, спокойный, любит прогулки. Хорош для семьи.">
+      <div class="dog-photo"><img src="https://images.dog.ceo/breeds/mix/DogPicture1.jpg" onerror="this.src='https://placedog.net/500/320?random=1'" alt="Шарик"></div>
+      <div class="dog-body">
+        <h3>Шарик</h3>
+        <div class="meta">3 года · дворняжка</div>
+        <p>Добрый и спокойный, любит играть с людьми.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Шарик">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="dog-card" data-name="Рыжик" data-age="1 год" data-breed="Лабрадор" data-desc="Активный, энергичный. Нужен хозяин для прогулок и игр.">
+      <div class="dog-photo"><img src="https://images.dog.ceo/breeds/labrador/n02099712_4203.jpg" alt="Рыжик"></div>
+      <div class="dog-body">
+        <h3>Рыжик</h3>
+        <div class="meta">1 год · лабрадор</div>
+        <p>Активный и дружелюбный, любит бегать и плавать.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Рыжик">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="dog-card" data-name="Джесси" data-age="2 года" data-breed="Бульдог" data-desc="Спокойная, любит детей, нужна семья для спокойной жизни.">
+      <div class="dog-photo"><img src="https://images.dog.ceo/breeds/bulldog-french/n02108915_1623.jpg" alt="Джесси"></div>
+      <div class="dog-body">
+        <h3>Джесси</h3>
+        <div class="meta">2 года · бульдог</div>
+        <p>Спокойная и ласковая, отлично ладит с детьми.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Джесси">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="dog-card" data-name="Малыш" data-age="4 месяца" data-breed="Метис" data-desc="Щенок, игривый и добрый, нужен заботливый хозяин.">
+      <div class="dog-photo"><img src="https://placedog.net/501/320" alt="Малыш"></div>
+      <div class="dog-body">
+        <h3>Малыш</h3>
+        <div class="meta">4 месяца · метис</div>
+        <p>Милый щенок, быстро учится и любит внимание.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Малыш">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="dog-card" data-name="Гром" data-age="5 лет" data-breed="Овчарка" data-desc="Серьёзный охранник, преданный и смелый.">
+      <div class="dog-photo"><img src="https://images.dog.ceo/breeds/germanshepherd/n02106662_3128.jpg" alt="Гром"></div>
+      <div class="dog-body">
+        <h3>Гром</h3>
+        <div class="meta">5 лет · овчарка</div>
+        <p>Отличные охранные качества, нужен опытный хозяин.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Гром">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="dog-card" data-name="Белка" data-age="1.5 года" data-breed="Микс" data-desc="Нежная и добрая, любит детей и других животных.">
+      <div class="dog-photo"><img src="https://placedog.net/506/320" alt="Белка"></div>
+      <div class="dog-body">
+        <h3>Белка</h3>
+        <div class="meta">1.5 года · микс</div>
+        <p>Игривaя и ласковая, легко адаптируется.</p>
+        <div class="card-actions">
+          <button class="btn btn-sm btn-primary more-btn">Подробнее</button>
+          <a class="btn btn-sm" href="mailto:info@dogshome.kz?subject=Усыновление%20Белка">Усыновить</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- HELP -->
+<section id="help" class="section container">
+  <h2>Как вы можете помочь</h2>
+  <div class="help-list">
+    <div class="help-item">🐾 Усыновить</div>
+    <div class="help-item">🤝 Стать волонтером</div>
+    <div class="help-item">💳 Пожертвовать</div>
+    <div class="help-item">🍖 Привезти корм</div>
+  </div>
+</section>
+
+<!-- CONTACT / FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div style="max-width:900px;margin:0 auto;display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:center">
+      <div class="contact-card">
+        <strong>Телефон:</strong> +7 777 123 45 67<br>
+        <strong>Email:</strong> info@dogshome.kz<br>
+        <strong>Адрес:</strong> г. Астана
+      </div>
+
+      <div class="contact-form" style="min-width:320px;">
+        <form id="contactForm">
+          <label for="name">Имя</label>
+          <input id="name" required placeholder="Ваше имя" />
+          <label for="email">Email</label>
+          <input id="email" type="email" required placeholder="you@mail.com" />
+          <label for="msg">Сообщение</label>
+          <textarea id="msg" rows="4" placeholder="Хочу помочь..."></textarea>
+          <div style="margin-top:10px">
+            <button type="submit" style="background:#10b981;color:rgb(21, 6, 6);border:0;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="creators">Создатели сайта: <b>Сайлханова Назира</b> и <b>Мурат Камила</b></div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-inner">
+      <div class="modal-photo"><img id="modalImg" src="" alt=""></div>
+      <div class="modal-body">
+        <h3 id="modalName"></h3>
+        <div class="meta" id="modalMeta"></div>
+        <p id="modalDesc"></p>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <a id="modalAdopt" class="btn btn-primary" href="#">Усыновить</a>
+          <button id="modalClose" class="modal-close">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Smooth scroll for nav links and choose button
+  document.querySelectorAll('.nav-link, #chooseBtn, .btn-ghost').forEach(el=>{
+    el.addEventListener('click', (e)=>{
+      const href = el.getAttribute('href');
+      if(href && href.startsWith('#')){
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+
+  // Burger menu – simple toggle of nav visibility on small screens
+  const burger = document.getElementById('burger');
+  burger && burger.addEventListener('click', ()=>{
+    const nav = document.querySelector('nav');
+    if(nav.style.display === 'flex') nav.style.display = 'none';
+    else nav.style.display = 'flex';
+  });
+
+  // Modal logic for "Подробнее"
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalImg = document.getElementById('modalImg');
+  const modalName = document.getElementById('modalName');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalAdopt = document.getElementById('modalAdopt');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('.more-btn').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      const card = e.target.closest('.dog-card');
+      const img = card.querySelector('img').src;
+      const name = card.dataset.name;
+      const age = card.dataset.age;
+      const breed = card.dataset.breed;
+      const desc = card.dataset.desc;
+      modalImg.src = img;
+      modalName.textContent = name;
+      modalMeta.textContent = age + " · " + breed;
+      modalDesc.textContent = desc;
+      modalAdopt.href = `mailto:info@dogshome.kz?subject=Усыновление%20${encodeURIComponent(name)}`;
+      modalBackdrop.classList.add('show');
+      modalBackdrop.setAttribute('aria-hidden','false');
+    });
+  });
+
+  modalClose.addEventListener('click', ()=>{ modalBackdrop.classList.remove('show'); modalBackdrop.setAttribute('aria-hidden','true');});
+  modalBackdrop.addEventListener('click', (e)=>{ if(e.target===modalBackdrop){ modalBackdrop.classList.remove('show'); modalBackdrop.setAttribute('aria-hidden','true'); }});
+
+  // Contact form (local)
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value || 'Не указано';
+    const email = document.getElementById('email').value || 'Не указано';
+    alert(`Спасибо, ${name}! Мы получили ваше сообщение. Мы свяжемся по ${email}.`);
+    this.reset();
+  });
+
+  // Ensure images gracefully fallback if remote fails
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=>{ img.src = 'https://placedog.net/500/320?random=' + Math.floor(Math.random()*1000); });
+  });
+
+  // Accessibility: close modal with ESC
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ modalBackdrop.classList.remove('show'); modalBackdrop.setAttribute('aria-hidden','true'); }});
+</script>
+
+</body>
+</html>
